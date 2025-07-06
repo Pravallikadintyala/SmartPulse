@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Heart Disease Detection App</title>
+<!-- Use Flask's url_for to load CSS -->
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <h1 class="welcome-heading">Welcome to Our Heart Disease Detection App</h1>
+    <nav>
+      <ul class="navbar">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#UploadECG">Upload ECG</a></li>
+        <li><a href="#howitworks">How It Works</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+        <li><a href="{{ url_for('logout') }}" style="color:#e7508f; font-weight:bold;">Sign Out</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Home Section -->
+  <section id="home">
+    <h2>Your Heart Health at Your Fingertips</h2>
+    <p>
+      Take charge of your heart health today! Our advanced AI-powered app brings hospital-grade ECG analysis right to your device.
+      Simply upload your ECG image and receive accurate insights about your heart’s condition in seconds.
+    </p>
+    <p>
+      Empower yourself with early detection and proactive care. Whether you’re a healthcare professional or just looking after your own heart,
+      our secure and reliable tool gives you the confidence to make informed decisions about your cardiovascular wellness.
+    </p>
+    <p>
+      Ready to know what your heart is saying? Upload your ECG image and discover the power of cutting-edge heart disease detection now!
+    </p>
+  </section>
+
+  <!-- About Section -->
+  <section id="about">
+    <h2>About</h2>
+    <p>
+      Our mission is to provide fast, secure, and reliable heart disease detection using state-of-the-art deep learning techniques.
+      By analyzing ECG images with precision, we help people gain valuable insights into their cardiovascular health—anytime, anywhere.
+    </p>
+    <section id="about" class="about-section">
+  <h2> How Our ECG Classifier Works</h2>
+  <p style="text-align: center;">
+    Our AI system classifies ECG images into four key heart conditions. Click on each category below to learn more.<br>
+     🩺 Ready to discover what your ECG says. Upload now and get fast, intelligent results powered by deep learning.
+
+  </p>
+
+    <div class="interactive-cards">
+      <div class="card" onclick="toggleCard(this)">
+        <h3>💚 Normal</h3>
+        <div class="card-content">
+          <p>
+            A steady and healthy heartbeat with consistent waveforms and no abnormal electrical activity.
+          </p>
+        </div>
+      </div>
+
+      <div class="card" onclick="toggleCard(this)">
+        <h3>⚠️ Abnormal Heartbeat</h3>
+        <div class="card-content">
+          <p>
+            Shows signs of arrhythmias irregular rhythms such as skipped or extra beats. These may suggest underlying electrical issues.
+          </p>
+        </div>
+      </div>
+
+      <div class="card" onclick="toggleCard(this)">
+        <h3>🕰️ History of Myocardial Infarction</h3>
+        <div class="card-content">
+          <p>
+            Evidence of a past heart attack. These ECG traces reflect scar tissue or damaged areas from prior cardiac events.
+          </p>
+        </div>
+      </div>
+
+      <div class="card" onclick="toggleCard(this)">
+        <h3>🚨 Myocardial Infarction</h3>
+        <div class="card-content">
+          <p>
+            Suggests an ongoing or very recent heart attack. The ECG reflects acute abnormalities needing urgent medical evaluation.
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+
+    <!-- How It Works Section -->
+  <section id="howitworks">
+    
+    <p style="text-align: center;">
+      1️⃣ Upload an ECG image with dimensions 2500 × 1500 pixels.  <br />
+      2️⃣ Our AI model analyzes image using deep learning algorithms. <br />
+      3️⃣ You receive a clear report on your heart health. fast and easy!
+    </p>
+  </section>
+
+  <!-- Upload ECG Section -->
+  <section id="UploadECG" class="upload-ecg-section">
+    <h2>Upload ECG</h2>
+    <p>
+      Upload your ECG image here and get instant feedback on your heart condition. Our platform ensures your data is safe and your results are accurate.
+    </p>
+    <form id="ecgUploadForm" method="POST" enctype="multipart/form-data" action="/predict">
+      <label for="ecgFile" class="custom-file-upload">
+        Choose File
+      </label>
+      <input type="file" id="ecgFile" name="ecgFile" accept="image/*" required />
+      <button type="submit" class="upload-btn">Upload</button>
+    </form>
+    <small class="file-note">Supported formats: JPG, PNG. Max size: 5MB.</small>
+  </section>
+
+
+
+  <!-- Contact Us Section -->
+  <footer id="contact">
+    <h2>Contact Us</h2>
+    <p>Email: pravallika@gmail.com</p>
+    <p>Phone: +91 9182786202</p>
+    <div style="margin-top: 15px;">
+      <a href="{{ url_for('logout') }}" style="color:#e7508f; font-weight:bold; text-decoration:none;">
+        Sign Out
+      </a>
+    </div>
+  </footer>
+
+  <!-- Use Flask's url_for to load JS if needed -->
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const links = document.querySelectorAll('a[href^="#"]');
+    links.forEach(link => {
+      link.addEventListener("click", function (e) {
+        const targetId = this.getAttribute("href");
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          e.preventDefault();
+          targetElement.scrollIntoView({ behavior: "smooth" });
+        }
+      });
+    });
+
+    // Make all cards toggleable
+    const cards = document.querySelectorAll(".card");
+    cards.forEach(card => {
+      card.addEventListener("click", () => {
+        card.classList.toggle("open");
+      });
+    });
+  });
+</script>
+</body>
+</html>
+
+
+</body>
+</html>
